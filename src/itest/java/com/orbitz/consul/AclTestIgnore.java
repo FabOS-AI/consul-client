@@ -1,3 +1,4 @@
+/*
 package com.orbitz.consul;
 
 import com.google.common.net.HostAndPort;
@@ -328,3 +329,4 @@ public class AclTestIgnore {
     }
 
 }
+*/

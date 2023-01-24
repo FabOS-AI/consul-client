@@ -10,6 +10,7 @@ import java.util.Optional;
 
 
 @Value.Immutable
+@Value.Style(init = "set*")
 @JsonSerialize(as = ImmutablePolicyResponse.class)
 @JsonDeserialize(as = ImmutablePolicyResponse.class)
 @JsonIgnoreProperties(ignoreUnknown = true)

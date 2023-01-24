@@ -392,6 +392,11 @@ public class Consul {
             return this;
         }
 
+        public Builder withCustomAuthInterceptor(Interceptor interceptor){
+            authInterceptor = interceptor;
+            return this;
+        }
+
         /**
         * Sets the ACL token to be used with Consul
         *

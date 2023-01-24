@@ -14,6 +14,9 @@ public abstract class BasePolicyResponse {
     @JsonProperty("Name")
     public abstract String name();
 
+    @JsonProperty("Description")
+    public abstract Optional<String> description();
+
     @JsonProperty("Datacenters")
     public abstract Optional<List<String>> datacenters();
 

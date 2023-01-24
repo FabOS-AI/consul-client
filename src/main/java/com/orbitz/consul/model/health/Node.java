@@ -9,12 +9,16 @@ import com.orbitz.consul.model.catalog.TaggedAddresses;
 import org.immutables.value.Value;
 
 import java.util.Map;
+import java.util.UUID;
 
 @Value.Immutable
 @JsonSerialize(as = ImmutableNode.class)
 @JsonDeserialize(as = ImmutableNode.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Node {
+
+    @JsonProperty("ID")
+    public abstract Optional<UUID> getId();
 
     @JsonProperty("Node")
     public abstract String getNode();
