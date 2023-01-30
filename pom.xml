@@ -29,7 +29,7 @@
     </developers>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>8</java.version>
+        <java.version>8</java.version>F
 
         <apache.commons.version>3.11</apache.commons.version>
         <commonscodec.version>1.15</commonscodec.version>

@@ -10,10 +10,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.orbitz.consul.model.agent.Check;
+import com.orbitz.consul.model.agent.Registration;
 import com.orbitz.consul.model.health.Service;
 import org.immutables.value.Value;
 
 @Value.Immutable
+@Value.Style(init = "set*")
 @JsonSerialize(as = ImmutableCatalogRegistration.class)
 @JsonDeserialize(as = ImmutableCatalogRegistration.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -29,7 +31,7 @@ public abstract class CatalogRegistration {
     public abstract String node();
 
     @JsonProperty("Address")
-    public abstract String address();
+    public abstract Optional<String> address();
 
     @JsonProperty("NodeMeta")
     public abstract Map<String, String> nodeMeta();

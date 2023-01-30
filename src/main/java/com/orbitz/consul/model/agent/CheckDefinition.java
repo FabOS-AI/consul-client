@@ -4,28 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import java.util.Optional;
 import com.google.common.collect.ImmutableList;
 import org.immutables.value.Value;
 
 import java.util.List;
-
-import static com.google.common.base.Preconditions.checkState;
+import java.util.Optional;
 
 @Value.Immutable
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonSerialize(as = ImmutableCheck.class)
-@JsonDeserialize(as = ImmutableCheck.class)
-public abstract class Check {
-
-    @JsonProperty("CheckId")
-    public abstract Optional<String> getId();
-
-    @JsonProperty("Name")
-    public abstract Optional<String> getName();
-
-    @JsonProperty("Notes")
-    public abstract Optional<String> getNotes();
+@JsonSerialize(as = ImmutableCheckDefinition.class)
+@JsonDeserialize(as = ImmutableCheckDefinition.class)
+public abstract class CheckDefinition {
 
     @JsonProperty("Output")
     public abstract Optional<String> getOutput();
@@ -61,18 +50,5 @@ public abstract class Check {
     @JsonProperty("DeregisterCriticalServiceAfter")
     public abstract Optional<String> getDeregisterCriticalServiceAfter();
 
-    @Value.Check
-    protected void validate() {
-
-        checkState(getHttp().isPresent() || getTtl().isPresent()
-            || getArgs().isPresent() || getTcp().isPresent() || getGrpc().isPresent(),
-                "Check must specify either http, tcp, ttl, grpc or args");
-
-        if (getHttp().isPresent() || getArgs().isPresent() || getTcp().isPresent() || getGrpc().isPresent()) {
-            checkState(getInterval().isPresent(),
-                    "Interval must be set if check type is http, tcp, grpc or args");
-        }
-
-    }
 
 }

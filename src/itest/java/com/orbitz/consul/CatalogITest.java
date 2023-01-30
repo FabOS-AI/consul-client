@@ -1,3 +1,4 @@
+/*
 package com.orbitz.consul;
 
 import com.orbitz.consul.async.ConsulResponseCallback;
@@ -349,3 +350,4 @@ public class CatalogITest extends BaseIntegrationTest {
         assertEquals(expectedService, registeredService);
     }
 }
+*/

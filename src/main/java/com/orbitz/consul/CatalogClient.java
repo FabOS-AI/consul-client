@@ -3,10 +3,7 @@ package com.orbitz.consul;
 import com.orbitz.consul.async.ConsulResponseCallback;
 import com.orbitz.consul.config.ClientConfig;
 import com.orbitz.consul.model.ConsulResponse;
-import com.orbitz.consul.model.catalog.CatalogDeregistration;
-import com.orbitz.consul.model.catalog.CatalogNode;
-import com.orbitz.consul.model.catalog.CatalogRegistration;
-import com.orbitz.consul.model.catalog.CatalogService;
+import com.orbitz.consul.model.catalog.*;
 import com.orbitz.consul.model.health.Node;
 import com.orbitz.consul.monitoring.ClientEventCallback;
 import com.orbitz.consul.option.QueryOptions;
@@ -188,6 +185,15 @@ public class CatalogClient extends BaseCacheableClient {
                 queryOptions.getTag(), queryOptions.getNodeMeta(), queryOptions.toHeaders()), callback);
     }
 
+    public ConsulResponse<NodeServicesResponse> getNodeServices(String nodeName){
+        return this.getNodeServices(nodeName, QueryOptions.BLANK);
+    }
+
+    public ConsulResponse<NodeServicesResponse> getNodeServices(String nodeName, QueryOptions queryOptions){
+        return http.extractConsulResponse(api.getNodeServices(nodeName, queryOptions.toQuery(),
+                queryOptions.toHeaders()));
+    }
+
     /**
      * Retrieves a single node.
      * <p/>
@@ -303,11 +309,17 @@ public class CatalogClient extends BaseCacheableClient {
                                               @Query("node-meta") List<String> nodeMeta,
                                               @HeaderMap Map<String, String> headers);
 
+        @GET("catalog/node-services/{node-name}")
+        Call<NodeServicesResponse> getNodeServices(@Path("node-name") String nodeName,
+                                         @QueryMap Map<String, Object> queryMeta,
+                                         @HeaderMap Map<String, String> headers);
+
         @PUT("catalog/register")
         Call<Void> register(@Body CatalogRegistration registration, @QueryMap Map<String, Object> options);
 
         @PUT("catalog/deregister")
         Call<Void> deregister(@Body CatalogDeregistration deregistration, @QueryMap Map<String, Object> options);
+
 
 
     }
