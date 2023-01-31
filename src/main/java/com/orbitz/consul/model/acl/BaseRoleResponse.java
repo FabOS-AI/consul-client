@@ -3,36 +3,35 @@ package com.orbitz.consul.model.acl;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigInteger;
-import java.util.Date;
 import java.util.List;
 
 public abstract class BaseRoleResponse {
 
     @JsonProperty("ID")
-    public abstract String id();
+    public abstract String getId();
 
     @JsonProperty("Name")
-    public abstract String name();
+    public abstract String getName();
 
     @JsonProperty("Description")
-    public abstract String description();
+    public abstract String getDescription();
 
     @JsonProperty("Policies")
-    public abstract List<Role.RolePolicyLink> policies();
+    public abstract List<Role.RolePolicyLink> getPolicies();
 
     @JsonProperty("ServiceIdentities")
-    public abstract List<Role.RoleServiceIdentity> serviceIdentities();
+    public abstract List<Role.RoleServiceIdentity> getServiceIdentities();
 
     @JsonProperty("NodeIdentities")
-    public abstract List<Role.RoleNodeIdentity> nodeIdentities();
+    public abstract List<Role.RoleNodeIdentity> getNodeIdentities();
 
     @JsonProperty("CreateIndex")
-    public abstract BigInteger createIndex();
+    public abstract BigInteger getCreateIndex();
 
     @JsonProperty("ModifyIndex")
-    public abstract BigInteger modifyIndex();
+    public abstract BigInteger getModifyIndex();
 
     @JsonProperty("Hash")
-    public abstract String hash();
+    public abstract String getHash();
 
 }

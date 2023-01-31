@@ -16,5 +16,5 @@ import java.util.Optional;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class PolicyResponse extends BasePolicyResponse {
     @JsonProperty("Rules")
-    public abstract Optional<String> rules();
+    public abstract Optional<String> getRules();
 }

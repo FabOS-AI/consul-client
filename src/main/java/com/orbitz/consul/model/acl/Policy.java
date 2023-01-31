@@ -18,19 +18,19 @@ import java.util.Optional;
 public abstract class Policy {
 
     @JsonProperty("ID")
-    public abstract Optional<String> id();
+    public abstract Optional<String> getId();
 
     @JsonProperty("Description")
-    public abstract Optional<String> description();
+    public abstract Optional<String> getDescription();
 
     @JsonProperty("Name")
-    public abstract String name();
+    public abstract String getName();
 
     @JsonProperty("Rules")
-    public abstract Optional<String> rules();
+    public abstract Optional<String> getRules();
 
     @JsonProperty("Datacenters")
     @JsonDeserialize(as = ImmutableList.class, contentAs = String.class)
-    public abstract Optional<List<String>> datacenters();
+    public abstract Optional<List<String>> getDatacenters();
 
 }

@@ -17,20 +17,20 @@ import java.math.BigInteger;
 public abstract class AclResponse {
 
     @JsonProperty("CreateIndex")
-    public abstract BigInteger createIndex();
+    public abstract BigInteger getCreateIndex();
 
     @JsonProperty("ModifyIndex")
-    public abstract BigInteger modifyIndex();
+    public abstract BigInteger getModifyIndex();
 
     @JsonProperty("ID")
-    public abstract Optional<String> id();
+    public abstract Optional<String> getId();
 
     @JsonProperty("Name")
-    public abstract Optional<String> name();
+    public abstract Optional<String> getName();
 
     @JsonProperty("Type")
-    public abstract Optional<String> type();
+    public abstract Optional<String> getType();
 
     @JsonProperty("Rules")
-    public abstract Optional<String> rules();
+    public abstract Optional<String> getRules();
 }

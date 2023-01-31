@@ -9,23 +9,23 @@ import java.util.Optional;
 public abstract class BasePolicyResponse {
 
     @JsonProperty("ID")
-    public abstract String id();
+    public abstract String getId();
 
     @JsonProperty("Name")
-    public abstract String name();
+    public abstract String getName();
 
     @JsonProperty("Description")
-    public abstract Optional<String> description();
+    public abstract Optional<String> getDescription();
 
     @JsonProperty("Datacenters")
-    public abstract Optional<List<String>> datacenters();
+    public abstract Optional<List<String>> getDatacenters();
 
     @JsonProperty("Hash")
-    public abstract String hash();
+    public abstract String getHash();
 
     @JsonProperty("CreateIndex")
-    public abstract BigInteger createIndex();
+    public abstract BigInteger getCreateIndex();
 
     @JsonProperty("ModifyIndex")
-    public abstract BigInteger modifyIndex();
+    public abstract BigInteger getModifyIndex();
 }
