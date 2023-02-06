@@ -104,11 +104,11 @@ public class AgentITest extends BaseIntegrationTest {
         String serviceId = UUID.randomUUID().toString();
 
         Registration registration = ImmutableRegistration.builder()
-                .name(serviceName)
-                .id(serviceId)
+                .setName(serviceName)
+                .setId(serviceId)
                 .addChecks(ImmutableRegCheck.builder()
-                    .grpc("localhost:12345")
-                    .interval("10s")
+                    .setGrpc("localhost:12345")
+                    .setInterval("10s")
                     .build())
                 .build();
         client.agentClient().register(registration);
@@ -135,11 +135,11 @@ public class AgentITest extends BaseIntegrationTest {
         String checkId = UUID.randomUUID().toString();
 
         Registration registration = ImmutableRegistration.builder()
-                .name(serviceName)
-                .id(serviceId)
+                .setName(serviceName)
+                .setId(serviceId)
                 .addChecks(ImmutableRegCheck.builder()
-                        .id(checkId)
-                        .ttl("10s")
+                        .setId(checkId)
+                        .setTtl("10s")
                         .build())
                 .build();
 
@@ -168,11 +168,11 @@ public class AgentITest extends BaseIntegrationTest {
         String checkName = UUID.randomUUID().toString();
 
         Registration registration = ImmutableRegistration.builder()
-                .name(serviceName)
-                .id(serviceId)
+                .setName(serviceName)
+                .setId(serviceId)
                 .addChecks(ImmutableRegCheck.builder()
-                        .name(checkName)
-                        .ttl("10s")
+                        .setName(checkName)
+                        .setTtl("10s")
                         .build())
                 .build();
 
@@ -234,12 +234,12 @@ public class AgentITest extends BaseIntegrationTest {
                 Registration.RegCheck.http("http://localhost:8080/health", 10));
 
         Registration reg = ImmutableRegistration.builder()
-                .check(single)
-                .checks(regChecks)
-                .address("localhost")
-                .port(8080)
-                .name(serviceName)
-                .id(serviceId)
+                .setCheck(single)
+                .setChecks(regChecks)
+                .setAddress("localhost")
+                .setPort(8080)
+                .setName(serviceName)
+                .setId(serviceId)
                 .build();
         client.agentClient().register(reg);
 
@@ -267,11 +267,11 @@ public class AgentITest extends BaseIntegrationTest {
                 Registration.RegCheck.http("http://localhost:8080/health", 10, 1, "Custom description."));
 
         Registration reg = ImmutableRegistration.builder()
-                .checks(regChecks)
-                .address("localhost")
-                .port(8080)
-                .name(serviceName)
-                .id(serviceId)
+                .setChecks(regChecks)
+                .setAddress("localhost")
+                .setPort(8080)
+                .setName(serviceName)
+                .setId(serviceId)
                 .build();
 
         client.agentClient().register(reg, QueryOptions.BLANK);
@@ -282,11 +282,11 @@ public class AgentITest extends BaseIntegrationTest {
                 Registration.RegCheck.args(Collections.singletonList("/usr/bin/echo \"sup\""), 10, 1, "Custom description."));
 
         Registration secondRegistration = ImmutableRegistration.builder()
-                .checks(regCheck)
-                .address("localhost")
-                .port(8080)
-                .name(serviceName)
-                .id(serviceId)
+                .setChecks(regChecks)
+                .setAddress("localhost")
+                .setPort(8080)
+                .setName(serviceName)
+                .setId(serviceId)
                 .build();
 
         ImmutableQueryParameterOptions queryParameterOptions = ImmutableQueryParameterOptions.builder()
@@ -354,14 +354,14 @@ public class AgentITest extends BaseIntegrationTest {
         Synchroniser.pause(Duration.ofMillis(100));
 
         Service expectedService = ImmutableService.builder()
-                .id(id)
-                .service(name)
-                .address("")
-                .port(8080)
-                .tags(tags)
-                .meta(meta)
-                .enableTagOverride(false)
-                .weights(ImmutableServiceWeights.builder().warning(1).passing(1).build())
+                .setId(id)
+                .setService(name)
+                .setAddress("")
+                .setPort(8080)
+                .setTags(tags)
+                .setMeta(meta)
+                .setEnableTagOverride(false)
+                .setWeights(ImmutableServiceWeights.builder().setWarning(1).setPassing(1).build())
                 .build();
         Service registeredService = null;
         for (Map.Entry<String, Service> service : client.agentClient().getServices().entrySet()) {
@@ -386,14 +386,14 @@ public class AgentITest extends BaseIntegrationTest {
         Synchroniser.pause(Duration.ofMillis(100));
 
         Service expectedService = ImmutableService.builder()
-                .id(id)
-                .service(name)
-                .address("")
-                .port(8080)
-                .tags(tags)
-                .meta(meta)
-                .enableTagOverride(false)
-                .weights(ImmutableServiceWeights.builder().warning(1).passing(1).build())
+                .setId(id)
+                .setService(name)
+                .setAddress("")
+                .setPort(8080)
+                .setTags(tags)
+                .setMeta(meta)
+                .setEnableTagOverride(false)
+                .setWeights(ImmutableServiceWeights.builder().setWarning(1).setPassing(1).build())
                 .build();
         Service registeredService = null;
         Map<String, Service> services = client.agentClient().getServices(
@@ -423,15 +423,15 @@ public class AgentITest extends BaseIntegrationTest {
         ConsulResponse<FullService> service = client.agentClient().getService(id, QueryOptions.BLANK);
 
         FullService expectedService = ImmutableFullService.builder()
-                .id(id)
-                .service(name)
-                .address("")
-                .port(8080)
-                .tags(tags)
-                .meta(meta)
-                .enableTagOverride(false)
-                .weights(ImmutableServiceWeights.builder().warning(1).passing(1).build())
-                .contentHash(service.getResponse().getContentHash())
+                .setId(id)
+                .setService(name)
+                .setAddress("")
+                .setPort(8080)
+                .setTags(tags)
+                .setMeta(meta)
+                .setEnableTagOverride(false)
+                .setWeights(ImmutableServiceWeights.builder().setWarning(1).setPassing(1).build())
+                .setContentHash(service.getResponse().getContentHash())
                 .build();
 
         assertEquals(expectedService, service.getResponse());

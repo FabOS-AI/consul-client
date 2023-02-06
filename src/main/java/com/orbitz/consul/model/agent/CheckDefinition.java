@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Value.Immutable
+@Value.Style(init = "set*")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonSerialize(as = ImmutableCheckDefinition.class)
 @JsonDeserialize(as = ImmutableCheckDefinition.class)

@@ -1,4 +1,3 @@
-/*
 package com.orbitz.consul;
 
 import com.orbitz.consul.async.ConsulResponseCallback;
@@ -125,34 +124,34 @@ public class CatalogITest extends BaseIntegrationTest {
 
         createAndCheckService(
                 ImmutableCatalogService.builder()
-                        .address("localhost")
-                        .datacenter("dc1")
-                        .node("node")
-                        .serviceAddress("localhost")
+                        .setAddress("localhost")
+                        .setDatacenter("dc1")
+                        .setNode("node")
+                        .setServiceAddress("localhost")
                         .addServiceTags("sometag")
-                        .serviceId(serviceId)
-                        .serviceName(service)
-                        .servicePort(8080)
+                        .setServiceId(serviceId)
+                        .setServiceName(service)
+                        .setServicePort(8080)
                         .putServiceMeta("metakey", "metavalue")
                         .putNodeMeta("a", "b")
-                        .serviceEnableTagOverride(true)
-                        .serviceWeights(ImmutableServiceWeights.builder().passing(42).warning(21).build())
+                        .setServiceEnableTagOverride(true)
+                        .setServiceWeights(ImmutableServiceWeights.builder().setPassing(42).setWarning(21).build())
                         .build(),
                 ImmutableCatalogRegistration.builder()
-                        .id(catalogId)
+                        .setId(catalogId)
                         .putNodeMeta("a", "b")
-                        .address("localhost")
-                        .datacenter("dc1")
-                        .node("node")
-                        .service(ImmutableService.builder()
-                                .address("localhost")
+                        .setAddress("localhost")
+                        .setDatacenter("dc1")
+                        .setNode("node")
+                        .setService(ImmutableService.builder()
+                                .setAddress("localhost")
                                 .addTags("sometag")
-                                .id(serviceId)
-                                .service(service)
-                                .port(8080)
+                                .setId(serviceId)
+                                .setService(service)
+                                .setPort(8080)
                                 .putMeta("metakey", "metavalue")
-                                .enableTagOverride(true) //setting this request flag sets the ServiceEnableTagOverride in the response
-                                .weights(ImmutableServiceWeights.builder().passing(42).warning(21).build())
+                                .setEnableTagOverride(true) //setting this request flag sets the ServiceEnableTagOverride in the response
+                                .setWeights(ImmutableServiceWeights.builder().setPassing(42).setWarning(21).build())
                                 .build())
                         .build()
         );
@@ -166,33 +165,33 @@ public class CatalogITest extends BaseIntegrationTest {
 
         createAndCheckService(
                 ImmutableCatalogService.builder()
-                        .address("localhost")
-                        .datacenter("dc1")
-                        .node("node")
-                        .serviceAddress("localhost")
+                        .setAddress("localhost")
+                        .setDatacenter("dc1")
+                        .setNode("node")
+                        .setServiceAddress("localhost")
                         .addServiceTags("sometag")
-                        .serviceId(serviceId)
-                        .serviceName(service)
-                        .servicePort(8080)
+                        .setServiceId(serviceId)
+                        .setServiceName(service)
+                        .setServicePort(8080)
                         .putServiceMeta("metakey", "metavalue")
                         .putNodeMeta("a", "b")
-                        .serviceEnableTagOverride(true)
-                        .serviceWeights(ImmutableServiceWeights.builder().passing(1).warning(1).build())
+                        .setServiceEnableTagOverride(true)
+                        .setServiceWeights(ImmutableServiceWeights.builder().setPassing(1).setWarning(1).build())
                         .build(),
                 ImmutableCatalogRegistration.builder()
-                        .id(catalogId)
+                        .setId(catalogId)
                         .putNodeMeta("a", "b")
-                        .address("localhost")
-                        .datacenter("dc1")
-                        .node("node")
-                        .service(ImmutableService.builder()
-                                .address("localhost")
+                        .setAddress("localhost")
+                        .setDatacenter("dc1")
+                        .setNode("node")
+                        .setService(ImmutableService.builder()
+                                .setAddress("localhost")
                                 .addTags("sometag")
-                                .id(serviceId)
-                                .service(service)
-                                .port(8080)
+                                .setId(serviceId)
+                                .setService(service)
+                                .setPort(8080)
                                 .putMeta("metakey", "metavalue")
-                                .enableTagOverride(true) //setting this request flag sets the ServiceEnableTagOverride in the response
+                                .setEnableTagOverride(true) //setting this request flag sets the ServiceEnableTagOverride in the response
                                 .build())
                         .build()
         );
@@ -208,17 +207,17 @@ public class CatalogITest extends BaseIntegrationTest {
         String catalogId = UUID.randomUUID().toString();
 
         CatalogRegistration registration = ImmutableCatalogRegistration.builder()
-                .id(catalogId)
+                .setId(catalogId)
                 .putNodeMeta("a", "b")
-                .address("localhost")
-                .datacenter("dc1")
-                .node("node")
-                .service(ImmutableService.builder()
-                        .address("localhost")
+                .setAddress("localhost")
+                .setDatacenter("dc1")
+                .setNode("node")
+                .setService(ImmutableService.builder()
+                        .setAddress("localhost")
                         .addTags("sometag")
-                        .id(serviceId)
-                        .service(service)
-                        .port(8080)
+                        .setId(serviceId)
+                        .setService(service)
+                        .setPort(8080)
                         .putMeta("metakey", "metavalue")
                         .build())
                 .build();
@@ -226,8 +225,8 @@ public class CatalogITest extends BaseIntegrationTest {
         catalogClient.register(registration);
 
         CatalogDeregistration deregistration = ImmutableCatalogDeregistration.builder()
-                .node("node")
-                .serviceId(serviceId)
+                .setNode("node")
+                .setServiceId(serviceId)
                 .build();
 
         catalogClient.deregister(deregistration);
@@ -289,15 +288,15 @@ public class CatalogITest extends BaseIntegrationTest {
         String catalogId = UUID.randomUUID().toString();
 
         CatalogRegistration registration = ImmutableCatalogRegistration.builder()
-                .id(catalogId)
+                .setId(catalogId)
                 .putNodeMeta("a", "b")
-                .address("localhost")
-                .node(nodeName)
-                .service(ImmutableService.builder()
-                        .address("localhost")
-                        .id(serviceId)
-                        .service(serviceName)
-                        .port(20001)
+                .setAddress("localhost")
+                .setNode(nodeName)
+                .setService(ImmutableService.builder()
+                        .setAddress("localhost")
+                        .setId(serviceId)
+                        .setService(serviceName)
+                        .setPort(20001)
                         .build())
                 .build();
 
@@ -334,7 +333,7 @@ public class CatalogITest extends BaseIntegrationTest {
         catalogClient.register(registration);
         Synchroniser.pause(Duration.ofMillis(100));
 
-        String serviceName = registration.service().get().getService();
+        String serviceName = registration.getService().get().getService();
 
         ConsulResponse<List<CatalogService>> response = catalogClient.getService(serviceName);
 
@@ -350,4 +349,3 @@ public class CatalogITest extends BaseIntegrationTest {
         assertEquals(expectedService, registeredService);
     }
 }
-*/

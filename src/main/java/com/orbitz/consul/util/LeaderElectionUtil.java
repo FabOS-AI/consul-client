@@ -49,7 +49,7 @@ public class LeaderElectionUtil {
 
 
     private String createSession(String serviceName) {
-        final Session session = ImmutableSession.builder().name(serviceName).build();
+        final Session session = ImmutableSession.builder().setName(serviceName).build();
         return client.sessionClient().createSession(session).getId();
     }
 

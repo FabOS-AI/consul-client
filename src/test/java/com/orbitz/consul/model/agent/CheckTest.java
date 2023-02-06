@@ -13,46 +13,46 @@ public class CheckTest {
     @Test(expected = IllegalStateException.class)
     public void buildingCheckThrowsIfMissingMethod() {
         ImmutableCheck.builder()
-                .id("id")
-                .interval("10s")
-                .name("name")
+                .setId("id")
+                .setInterval("10s")
+                .setName("name")
                 .build();
     }
 
     @Test(expected = IllegalStateException.class)
     public void buildingCheckWithHttpThrowsIfMissingInterval() {
         ImmutableCheck.builder()
-                .id("id")
-                .http("http://foo.local:1337/health")
-                .name("name")
+                .setId("id")
+                .setHttp("http://foo.local:1337/health")
+                .setName("name")
                 .build();
     }
 
     @Test(expected = IllegalStateException.class)
     public void buildingCheckWithGrpcThrowsIfMissingInterval() {
         ImmutableCheck.builder()
-                .id("id")
-                .grpc("localhost:12345")
-                .name("name")
+                .setId("id")
+                .setGrpc("localhost:12345")
+                .setName("name")
                 .build();
     }
 
     @Test(expected = IllegalStateException.class)
     public void buildingCheckWithArgsThrowsIfMissingInterval() {
         ImmutableCheck.builder()
-                .id("id")
-                .args(Collections.singletonList("/bin/echo \"hi\""))
-                .name("name")
+                .setId("id")
+                .setArgs(Collections.singletonList("/bin/echo \"hi\""))
+                .setName("name")
                 .build();
     }
 
     @Test
     public void severalArgsCanBeAddedToCheck() {
         Check check = ImmutableCheck.builder()
-                .id("id")
-                .args(Lists.newArrayList("/bin/echo \"hi\"", "/bin/echo \"hello\""))
-                .interval("1s")
-                .name("name")
+                .setId("id")
+                .setArgs(Lists.newArrayList("/bin/echo \"hi\"", "/bin/echo \"hello\""))
+                .setInterval("1s")
+                .setName("name")
                 .build();
 
         assertTrue("Args should be present in check", check.getArgs().isPresent());
@@ -62,9 +62,9 @@ public class CheckTest {
     @Test
     public void serviceTagsAreNotNullWhenNotSpecified() {
         Check check = ImmutableCheck.builder()
-                .ttl("")
-                .name("name")
-                .id("id")
+                .setTtl("")
+                .setName("name")
+                .setId("id")
                 .build();
 
         assertEquals(Collections.emptyList(), check.getServiceTags());
@@ -73,9 +73,9 @@ public class CheckTest {
     @Test
     public void serviceTagsCanBeAddedToCheck() {
         Check check = ImmutableCheck.builder()
-                .ttl("")
-                .name("name")
-                .id("id")
+                .setTtl("")
+                .setName("name")
+                .setId("id")
                 .addServiceTags("myTag")
                 .build();
 

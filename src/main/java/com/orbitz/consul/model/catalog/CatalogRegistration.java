@@ -7,10 +7,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 
 import com.orbitz.consul.model.agent.Check;
-import com.orbitz.consul.model.agent.Registration;
+import com.orbitz.consul.model.agent.CheckV2;
 import com.orbitz.consul.model.health.Service;
 import org.immutables.value.Value;
 
@@ -22,32 +21,32 @@ import org.immutables.value.Value;
 public abstract class CatalogRegistration {
 
     @JsonProperty("ID")
-    public abstract Optional<String> id();
+    public abstract Optional<String> getId();
 
     @JsonProperty("Datacenter")
-    public abstract Optional<String> datacenter();
+    public abstract Optional<String> getDatacenter();
 
     @JsonProperty("Node")
-    public abstract String node();
+    public abstract String getNode();
 
     @JsonProperty("Address")
-    public abstract Optional<String> address();
+    public abstract Optional<String> getAddress();
 
     @JsonProperty("NodeMeta")
-    public abstract Map<String, String> nodeMeta();
+    public abstract Map<String, String> getNodeMeta();
 
     @JsonProperty("TaggedAddresses")
-    public abstract Optional<TaggedAddresses> taggedAddresses();
+    public abstract Optional<TaggedAddresses> getTaggedAddresses();
 
     @JsonProperty("Service")
-    public abstract Optional<Service> service();
+    public abstract Optional<Service> getService();
 
     @JsonProperty("Check")
-    public abstract Optional<Check> check();
+    public abstract Optional<CheckV2> getCheck();
 
     @JsonProperty("WriteRequest")
-    public abstract Optional<WriteRequest> writeRequest();
+    public abstract Optional<WriteRequest> getWriteRequest();
 
     @JsonProperty("SkipNodeUpdate")
-    public abstract Optional<Boolean> skipNodeUpdate();
+    public abstract Optional<Boolean> getSkipNodeUpdate();
 }

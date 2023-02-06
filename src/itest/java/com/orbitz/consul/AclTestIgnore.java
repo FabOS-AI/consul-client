@@ -1,4 +1,3 @@
-/*
 package com.orbitz.consul;
 
 import com.google.common.net.HostAndPort;
@@ -51,7 +50,7 @@ public class AclTestIgnore {
     @Test
     public void listPolicies() {
         AclClient aclClient = client.aclClient();
-        assertTrue(aclClient.listPolicies().stream().anyMatch(p -> Objects.equals(p.name(), "global-management")));
+        assertTrue(aclClient.listPolicies().stream().anyMatch(p -> Objects.equals(p.getName(), "global-management")));
     }
 
     @Test
@@ -59,23 +58,23 @@ public class AclTestIgnore {
         AclClient aclClient = client.aclClient();
 
         String policyName = UUID.randomUUID().toString();
-        PolicyResponse policy = aclClient.createPolicy(ImmutablePolicy.builder().name(policyName).build());
-        assertThat(policy.name(), is(policyName));
+        PolicyResponse policy = aclClient.createPolicy(ImmutablePolicy.builder().setName(policyName).build());
+        assertThat(policy.getName(), is(policyName));
 
-        policy = aclClient.readPolicy(policy.id());
-        assertThat(policy.name(), is(policyName));
+        policy = aclClient.readPolicy(policy.getId());
+        assertThat(policy.getName(), is(policyName));
     }
 
     @Test
-    public void testCreateAndReadPolicyByName() {
+    public void testCreateAndReadPolicyBygetName() {
         AclClient aclClient = client.aclClient();
 
         String policyName = UUID.randomUUID().toString();
-        PolicyResponse policy = aclClient.createPolicy(ImmutablePolicy.builder().name(policyName).build());
-        assertThat(policy.name(), is(policyName));
+        PolicyResponse policy = aclClient.createPolicy(ImmutablePolicy.builder().setName(policyName).build());
+        assertThat(policy.getName(), is(policyName));
 
-        policy = aclClient.readPolicyByName(policy.name());
-        assertThat(policy.name(), is(policyName));
+        policy = aclClient.readPolicyByName(policy.getName());
+        assertThat(policy.getName(), is(policyName));
     }
 
     @Test
@@ -83,13 +82,13 @@ public class AclTestIgnore {
         AclClient aclClient = client.aclClient();
 
         String policyName = UUID.randomUUID().toString();
-        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().name(policyName).build());
+        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().setName(policyName).build());
 
         String newPolicyName = UUID.randomUUID().toString();
-        aclClient.updatePolicy(createdPolicy.id(), ImmutablePolicy.builder().name(newPolicyName).build());
+        aclClient.updatePolicy(createdPolicy.getId(), ImmutablePolicy.builder().setName(newPolicyName).build());
 
-        PolicyResponse updatedPolicy = aclClient.readPolicy(createdPolicy.id());
-        assertThat(updatedPolicy.name(), is(newPolicyName));
+        PolicyResponse updatedPolicy = aclClient.readPolicy(createdPolicy.getId());
+        assertThat(updatedPolicy.getName(), is(newPolicyName));
     }
 
     @Test
@@ -97,10 +96,10 @@ public class AclTestIgnore {
         AclClient aclClient = client.aclClient();
 
         String policyName = UUID.randomUUID().toString();
-        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().name(policyName).build());
+        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().setName(policyName).build());
 
         int oldPolicyCount = aclClient.listPolicies().size();
-        aclClient.deletePolicy(createdPolicy.id());
+        aclClient.deletePolicy(createdPolicy.getId());
         int newPolicyCount = aclClient.listPolicies().size();
 
         assertThat(newPolicyCount, is(oldPolicyCount - 1));
@@ -111,15 +110,15 @@ public class AclTestIgnore {
         AclClient aclClient = client.aclClient();
 
         String policyName = UUID.randomUUID().toString();
-        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().name(policyName).build());
+        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().setName(policyName).build());
 
         String tokenDescription = UUID.randomUUID().toString();
-        TokenResponse createdToken = aclClient.createToken(ImmutableToken.builder().description(tokenDescription).local(false).addPolicies(ImmutablePolicyLink.builder().id(createdPolicy.id()).build()).build());
+        TokenResponse createdToken = aclClient.createToken(ImmutableToken.builder().setDescription(tokenDescription).setLocal(false).addPolicies(ImmutablePolicyLink.builder().setId(createdPolicy.getId()).build()).build());
 
         TokenResponse readToken = aclClient.readToken(createdToken.accessorId());
 
         assertThat(readToken.description(), is(tokenDescription));
-        assertThat(readToken.policies().get(0).name().get(), is(policyName));
+        assertThat(readToken.policies().get(0).name(), is(policyName));
     }
 
     @Test
@@ -127,24 +126,24 @@ public class AclTestIgnore {
         AclClient aclClient = client.aclClient();
 
         String policyName = UUID.randomUUID().toString();
-        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().name(policyName).build());
+        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().setName(policyName).build());
 
         String tokenDescription = UUID.randomUUID().toString();
         TokenResponse createdToken = aclClient.createToken(
                 ImmutableToken.builder()
-                        .description(tokenDescription)
-                        .local(false)
+                        .setDescription(tokenDescription)
+                        .setLocal(false)
                         .addPolicies(
                                 ImmutablePolicyLink.builder()
-                                        .id(createdPolicy.id())
+                                        .setId(createdPolicy.getId())
                                         .build()
                         ).build());
 
         String updatedTokenDescription = UUID.randomUUID().toString();
         Token updateToken =
                 ImmutableToken.builder()
-                        .id(createdToken.accessorId())
-                        .description(updatedTokenDescription)
+                        .setId(createdToken.accessorId())
+                        .setDescription(updatedTokenDescription)
                         .build();
 
         TokenResponse readToken = aclClient.cloneToken(createdToken.accessorId(), updateToken);
@@ -158,17 +157,17 @@ public class AclTestIgnore {
         AclClient aclClient = client.aclClient();
 
         String policyName = UUID.randomUUID().toString();
-        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().name(policyName).build());
+        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().setName(policyName).build());
 
         String tokenId = UUID.randomUUID().toString();
         String tokenSecretId = UUID.randomUUID().toString();
         Token token = ImmutableToken.builder()
-                .id(tokenId)
-                .secretId(tokenSecretId)
-                .local(false)
+                .setId(tokenId)
+                .setSecretId(tokenSecretId)
+                .setLocal(false)
                 .addPolicies(
                         ImmutablePolicyLink.builder()
-                                .id(createdPolicy.id())
+                                .setId(createdPolicy.getId())
                                 .build()
                 ).build();
         TokenResponse createdToken = aclClient.createToken(token);
@@ -192,11 +191,11 @@ public class AclTestIgnore {
         AclClient aclClient = client.aclClient();
 
         String policyName = UUID.randomUUID().toString();
-        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().name(policyName).build());
+        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().setName(policyName).build());
 
-        TokenResponse createdToken = aclClient.createToken(ImmutableToken.builder().description("none").local(false).addPolicies(ImmutablePolicyLink.builder().id(createdPolicy.id()).build()).build());
+        TokenResponse createdToken = aclClient.createToken(ImmutableToken.builder().setDescription("none").setLocal(false).addPolicies(ImmutablePolicyLink.builder().setId(createdPolicy.getId()).build()).build());
         String newDescription = UUID.randomUUID().toString();
-        aclClient.updateToken(createdToken.accessorId(), ImmutableToken.builder().local(false).description(newDescription).build());
+        aclClient.updateToken(createdToken.accessorId(), ImmutableToken.builder().setLocal(false).setDescription(newDescription).build());
 
         TokenResponse readToken = aclClient.readToken(createdToken.accessorId());
         assertThat(readToken.description(), is(newDescription));
@@ -215,8 +214,8 @@ public class AclTestIgnore {
         AclClient aclClient = client.aclClient();
 
         String policyName = UUID.randomUUID().toString();
-        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().name(policyName).build());
-        TokenResponse createdToken = aclClient.createToken(ImmutableToken.builder().description(UUID.randomUUID().toString()).local(false).addPolicies(ImmutablePolicyLink.builder().id(createdPolicy.id()).build()).build());
+        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().setName(policyName).build());
+        TokenResponse createdToken = aclClient.createToken(ImmutableToken.builder().setDescription(UUID.randomUUID().toString()).setLocal(false).addPolicies(ImmutablePolicyLink.builder().setId(createdPolicy.getId()).build()).build());
 
         int oldTokenCount = aclClient.listTokens().size();
         aclClient.deleteToken(createdToken.accessorId());
@@ -231,11 +230,11 @@ public class AclTestIgnore {
 
         String roleName1 = UUID.randomUUID().toString();
         String roleName2 = UUID.randomUUID().toString();
-        aclClient.createRole(ImmutableRole.builder().name(roleName1).build());
-        aclClient.createRole(ImmutableRole.builder().name(roleName2).build());
+        aclClient.createRole(ImmutableRole.builder().setName(roleName1).build());
+        aclClient.createRole(ImmutableRole.builder().setName(roleName2).build());
 
-        assertTrue(aclClient.listRoles().stream().anyMatch(p -> Objects.equals(p.name(), roleName1)));
-        assertTrue(aclClient.listRoles().stream().anyMatch(p -> Objects.equals(p.name(), roleName2)));
+        assertTrue(aclClient.listRoles().stream().anyMatch(p -> Objects.equals(p.getName(), roleName1)));
+        assertTrue(aclClient.listRoles().stream().anyMatch(p -> Objects.equals(p.getName(), roleName2)));
     }
 
     @Test
@@ -243,21 +242,21 @@ public class AclTestIgnore {
         AclClient aclClient = client.aclClient();
 
         String roleName = UUID.randomUUID().toString();
-        RoleResponse role = aclClient.createRole(ImmutableRole.builder().name(roleName).build());
+        RoleResponse role = aclClient.createRole(ImmutableRole.builder().setName(roleName).build());
 
-        RoleResponse roleResponse = aclClient.readRole(role.id());
-        assertEquals(role.id(), roleResponse.id());
+        RoleResponse roleResponse = aclClient.readRole(role.getId());
+        assertEquals(role.getId(), roleResponse.getId());
     }
 
     @Test
-    public void testCreateAndReadRoleByName() {
+    public void testCreateAndReadRoleBygetName() {
         AclClient aclClient = client.aclClient();
 
         String roleName = UUID.randomUUID().toString();
-        RoleResponse role = aclClient.createRole(ImmutableRole.builder().name(roleName).build());
+        RoleResponse role = aclClient.createRole(ImmutableRole.builder().setName(roleName).build());
 
-        RoleResponse roleResponse = aclClient.readRoleByName(role.name());
-        assertEquals(role.name(), roleResponse.name());
+        RoleResponse roleResponse = aclClient.readRoleByName(role.getName());
+        assertEquals(role.getName(), roleResponse.getName());
     }
 
     @Test
@@ -265,24 +264,24 @@ public class AclTestIgnore {
         AclClient aclClient = client.aclClient();
 
         String policyName = UUID.randomUUID().toString();
-        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().name(policyName).build());
+        PolicyResponse createdPolicy = aclClient.createPolicy(ImmutablePolicy.builder().setName(policyName).build());
 
         String roleName = UUID.randomUUID().toString();
         RoleResponse role = aclClient.createRole(
                 ImmutableRole.builder()
-                        .name(roleName)
+                        .setName(roleName)
                         .addPolicies(
                                 ImmutableRolePolicyLink.builder()
-                                .id(createdPolicy.id())
+                                .setId(createdPolicy.getId())
                                 .build()
                         )
                         .build());
 
-        RoleResponse roleResponse = aclClient.readRole(role.id());
-        assertEquals(role.id(), roleResponse.id());
-        assertEquals(1, roleResponse.policies().size());
-        assertTrue(roleResponse.policies().get(0).id().isPresent());
-        assertEquals(createdPolicy.id(), roleResponse.policies().get(0).id().get());
+        RoleResponse roleResponse = aclClient.readRole(role.getId());
+        assertEquals(role.getId(), roleResponse.getId());
+        assertEquals(1, roleResponse.getPolicies().size());
+        assertTrue(roleResponse.getPolicies().get(0).getId().isPresent());
+        assertEquals(createdPolicy.getId(), roleResponse.getPolicies().get(0).getId().get());
     }
 
     @Test
@@ -293,21 +292,21 @@ public class AclTestIgnore {
         String roleDescription = UUID.randomUUID().toString();
         RoleResponse role = aclClient.createRole(
                 ImmutableRole.builder()
-                        .name(roleName)
-                        .description(roleDescription)
+                        .setName(roleName)
+                        .setDescription(roleDescription)
                         .build());
 
-        RoleResponse roleResponse = aclClient.readRole(role.id());
-        assertEquals(roleDescription, roleResponse.description());
+        RoleResponse roleResponse = aclClient.readRole(role.getId());
+        assertEquals(roleDescription, roleResponse.getDescription());
 
         String roleNewDescription = UUID.randomUUID().toString();
-        RoleResponse updatedRoleResponse = aclClient.updateRole(roleResponse.id(),
+        RoleResponse updatedRoleResponse = aclClient.updateRole(roleResponse.getId(),
                 ImmutableRole.builder()
-                        .name(roleName)
-                        .description(roleNewDescription)
+                        .setName(roleName)
+                        .setDescription(roleNewDescription)
                         .build());
 
-        assertEquals(roleNewDescription, updatedRoleResponse.description());
+        assertEquals(roleNewDescription, updatedRoleResponse.getDescription());
     }
 
     @Test
@@ -317,16 +316,15 @@ public class AclTestIgnore {
         String roleName = UUID.randomUUID().toString();
         RoleResponse role = aclClient.createRole(
                 ImmutableRole.builder()
-                        .name(roleName)
+                        .setName(roleName)
                         .build());
 
-        RoleResponse roleResponse = aclClient.readRole(role.id());
-        assertEquals(roleName, roleResponse.name());
+        RoleResponse roleResponse = aclClient.readRole(role.getId());
+        assertEquals(roleName, roleResponse.getName());
 
-        aclClient.deleteRole(roleResponse.id());
+        aclClient.deleteRole(roleResponse.getId());
 
-        assertThrows(ConsulException.class, () -> aclClient.readRole(roleResponse.id()));
+        assertThrows(ConsulException.class, () -> aclClient.readRole(roleResponse.getId()));
     }
 
 }
-*/

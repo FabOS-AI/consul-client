@@ -38,6 +38,6 @@ public abstract class Operation {
     public abstract Optional<String> session();
 
     public static ImmutableOperation.Builder builder(Verb verb) {
-        return ImmutableOperation.builder().verb(verb.toValue());
+        return ImmutableOperation.builder().setVerb(verb.toValue());
     }
 }

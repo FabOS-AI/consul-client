@@ -136,11 +136,11 @@ public class ConsulCacheTest {
 
         final String key = "foo";
         final ImmutableValue value = ImmutableValue.builder()
-                .createIndex(1)
-                .modifyIndex(2)
-                .lockIndex(2)
-                .key(key)
-                .flags(0)
+                .setCreateIndex(1)
+                .setModifyIndex(2)
+                .setLockIndex(2)
+                .setKey(key)
+                .setFlags(0)
                 .build();
         final List<Value> result = Collections.singletonList(value);
         final StubCallbackConsumer callbackConsumer = new StubCallbackConsumer(
@@ -177,11 +177,11 @@ public class ConsulCacheTest {
 
         final String key = "foo";
         final ImmutableValue value = ImmutableValue.builder()
-                .createIndex(1)
-                .modifyIndex(2)
-                .lockIndex(2)
-                .key(key)
-                .flags(0)
+                .setCreateIndex(1)
+                .setModifyIndex(2)
+                .setLockIndex(2)
+                .setKey(key)
+                .setFlags(0)
                 .build();
         final List<Value> result = Collections.singletonList(value);
         try (final AsyncCallbackConsumer callbackConsumer = new AsyncCallbackConsumer(result)) {
@@ -225,11 +225,11 @@ public class ConsulCacheTest {
 
         final String key = "foo";
         final ImmutableValue value = ImmutableValue.builder()
-                .createIndex(1)
-                .modifyIndex(2)
-                .lockIndex(2)
-                .key(key)
-                .flags(0)
+                .setCreateIndex(1)
+                .setModifyIndex(2)
+                .setLockIndex(2)
+                .setKey(key)
+                .setFlags(0)
                 .build();
         final List<Value> result = Collections.singletonList(value);
         final StubCallbackConsumer callbackConsumer = new StubCallbackConsumer(

@@ -22,11 +22,11 @@ public class ServiceTest {
     private Service tagged(String ... tags) {
         return ImmutableService
                 .builder()
-                .address("localhost")
-                .service("service")
-                .id("id")
+                .setAddress("localhost")
+                .setService("service")
+                .setId("id")
                 .addTags(tags)
-                .port(4333)
+                .setPort(4333)
                 .build();
     }
 

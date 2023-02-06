@@ -168,12 +168,12 @@ public class AgentClient extends BaseClient {
                          List<String> tags, Map<String, String> meta) {
         Registration registration = ImmutableRegistration
                 .builder()
-                .port(port)
-                .check(Optional.ofNullable(check))
-                .name(name)
-                .id(id)
-                .tags(tags)
-                .meta(meta)
+                .setPort(port)
+                .setCheck(Optional.ofNullable(check))
+                .setName(name)
+                .setId(id)
+                .setTags(tags)
+                .setMeta(meta)
                 .build();
 
         register(registration);
@@ -193,12 +193,12 @@ public class AgentClient extends BaseClient {
                          List<String> tags, Map<String, String> meta) {
         Registration registration = ImmutableRegistration
                 .builder()
-                .port(port)
-                .checks(checks)
-                .name(name)
-                .id(id)
-                .tags(tags)
-                .meta(meta)
+                .setPort(port)
+                .setChecks(checks)
+                .setName(name)
+                .setId(id)
+                .setTags(tags)
+                .setMeta(meta)
                 .build();
 
         register(registration);
@@ -286,11 +286,11 @@ public class AgentClient extends BaseClient {
      */
     public void registerCheck(String checkId, String name, List<String> args, long interval, String notes) {
         Check check = ImmutableCheck.builder()
-            .id(checkId)
-            .name(name)
-            .args(args)
-            .interval(String.format("%ss", interval))
-            .notes(Optional.ofNullable(notes))
+            .setId(checkId)
+            .setName(name)
+            .setArgs(args)
+            .setInterval(String.format("%ss", interval))
+            .setNotes(Optional.ofNullable(notes))
             .build();
 
         registerCheck(check);
@@ -307,11 +307,11 @@ public class AgentClient extends BaseClient {
      */
     public void registerCheck(String checkId, String name, String args, long interval, String notes) {
         Check check = ImmutableCheck.builder()
-                .id(checkId)
-                .name(name)
-                .args(Collections.singletonList(args))
-                .interval(String.format("%ss", interval))
-                .notes(Optional.ofNullable(notes))
+                .setId(checkId)
+                .setName(name)
+                .setArgs(Collections.singletonList(args))
+                .setInterval(String.format("%ss", interval))
+                .setNotes(Optional.ofNullable(notes))
                 .build();
 
         registerCheck(check);
@@ -329,11 +329,11 @@ public class AgentClient extends BaseClient {
     public void registerCheck(String checkId, String name, URL http, long interval, String notes) {
 
         Check check = ImmutableCheck.builder()
-                .id(checkId)
-                .name(name)
-                .http(http.toExternalForm())
-                .interval(String.format("%ss", interval))
-                .notes(Optional.ofNullable(notes))
+                .setId(checkId)
+                .setName(name)
+                .setHttp(http.toExternalForm())
+                .setInterval(String.format("%ss", interval))
+                .setNotes(Optional.ofNullable(notes))
                 .build();
 
         registerCheck(check);
@@ -351,11 +351,11 @@ public class AgentClient extends BaseClient {
     public void registerCheck(String checkId, String name, HostAndPort tcp, long interval, String notes) {
 
         Check check = ImmutableCheck.builder()
-                .id(checkId)
-                .name(name)
-                .tcp(tcp.toString())
-                .interval(String.format("%ss", interval))
-                .notes(Optional.ofNullable(notes))
+                .setId(checkId)
+                .setName(name)
+                .setTcp(tcp.toString())
+                .setInterval(String.format("%ss", interval))
+                .setNotes(Optional.ofNullable(notes))
                 .build();
 
         registerCheck(check);
@@ -383,10 +383,10 @@ public class AgentClient extends BaseClient {
     public void registerCheck(String checkId, String name, long ttl, String notes) {
 
         Check check = ImmutableCheck.builder()
-                .id(checkId)
-                .name(name)
-                .ttl(String.format("%ss", ttl))
-                .notes(Optional.ofNullable(notes))
+                .setId(checkId)
+                .setName(name)
+                .setTtl(String.format("%ss", ttl))
+                .setNotes(Optional.ofNullable(notes))
                 .build();
 
         registerCheck(check);

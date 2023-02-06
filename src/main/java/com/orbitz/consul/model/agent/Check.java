@@ -13,6 +13,7 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkState;
 
 @Value.Immutable
+@Value.Style(init = "set*")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonSerialize(as = ImmutableCheck.class)
 @JsonDeserialize(as = ImmutableCheck.class)

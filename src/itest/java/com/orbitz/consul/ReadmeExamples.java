@@ -34,12 +34,12 @@ public class ReadmeExamples extends BaseIntegrationTest {
 
         String serviceId = "1";
         Registration service = ImmutableRegistration.builder()
-                .id(serviceId)
-                .name("myService")
-                .port(8080)
-                .check(Registration.RegCheck.ttl(3L)) // registers with a TTL of 3 seconds
-                .tags(Collections.singletonList("tag1"))
-                .meta(Collections.singletonMap("version", "1.0"))
+                .setId(serviceId)
+                .setName("myService")
+                .setPort(8080)
+                .setCheck(Registration.RegCheck.ttl(3L)) // registers with a TTL of 3 seconds
+                .setTags(Collections.singletonList("tag1"))
+                .setMeta(Collections.singletonMap("version", "1.0"))
                 .build();
 
         agentClient.register(service);

@@ -11,19 +11,20 @@ import org.immutables.value.Value;
 import static com.google.common.base.Preconditions.checkState;
 
 @Value.Immutable
+@Value.Style(init = "set*")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonSerialize(as = ImmutableCheckV2.class)
 @JsonDeserialize(as = ImmutableCheckV2.class)
 public abstract class CheckV2 {
 
     @JsonProperty("Node")
-    public abstract String getNode();
+    public abstract Optional<String> getNode();
 
     @JsonProperty("CheckId")
-    public abstract String getId();
+    public abstract Optional<String> getId();
 
     @JsonProperty("Name")
-    public abstract String getName();
+    public abstract Optional<String> getName();
 
     @JsonProperty("Notes")
     public abstract Optional<String> getNotes();
@@ -38,7 +39,7 @@ public abstract class CheckV2 {
     public abstract Optional<String> getNamespace();
 
     @JsonProperty("Definition")
-    public abstract CheckDefinition getDefinition();
+    public abstract Optional<CheckDefinition> getDefinition();
 
 
 }

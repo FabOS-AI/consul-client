@@ -60,12 +60,12 @@ public class KVCacheTest {
 
     private Value createValue(final String key) {
         return ImmutableValue.builder()
-                .createIndex(1234567890)
-                .modifyIndex(1234567890)
-                .lockIndex(1234567890)
-                .flags(1234567890)
-                .key(key)
-                .value(Optional.empty())
+                .setCreateIndex(1234567890)
+                .setModifyIndex(1234567890)
+                .setLockIndex(1234567890)
+                .setFlags(1234567890)
+                .setKey(key)
+                .setValue(Optional.empty())
                 .build();
     }
 

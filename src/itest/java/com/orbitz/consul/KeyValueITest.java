@@ -262,7 +262,7 @@ public class KeyValueITest extends BaseIntegrationTest {
         SessionClient sessionClient = client.sessionClient();
         String key = UUID.randomUUID().toString();
         String value = "session_" + UUID.randomUUID().toString();
-        SessionCreatedResponse response = sessionClient.createSession(ImmutableSession.builder().name(value).build());
+        SessionCreatedResponse response = sessionClient.createSession(ImmutableSession.builder().setName(value).build());
         String sessionId = response.getId();
 
         try {
@@ -290,7 +290,7 @@ public class KeyValueITest extends BaseIntegrationTest {
         assertEquals(false, keyValueClient.getSession(key).isPresent());
 
         String sessionValue = "session_" + UUID.randomUUID().toString();
-        SessionCreatedResponse response = sessionClient.createSession(ImmutableSession.builder().name(sessionValue).build());
+        SessionCreatedResponse response = sessionClient.createSession(ImmutableSession.builder().setName(sessionValue).build());
         String sessionId = response.getId();
 
         try {
@@ -327,11 +327,11 @@ public class KeyValueITest extends BaseIntegrationTest {
         assertEquals(false, keyValueClient.getSession(key).isPresent());
 
         String sessionValue = "session_" + UUID.randomUUID().toString();
-        SessionCreatedResponse response = sessionClient.createSession(ImmutableSession.builder().name(sessionValue).build());
+        SessionCreatedResponse response = sessionClient.createSession(ImmutableSession.builder().setName(sessionValue).build());
         String sessionId = response.getId();
 
         String sessionValue2 = "session_" + UUID.randomUUID().toString();
-        SessionCreatedResponse response2 = sessionClient.createSession(ImmutableSession.builder().name(sessionValue).build());
+        SessionCreatedResponse response2 = sessionClient.createSession(ImmutableSession.builder().setName(sessionValue).build());
         String sessionId2 = response2.getId();
 
         try {
@@ -466,9 +466,9 @@ public class KeyValueITest extends BaseIntegrationTest {
         KeyValueClient keyValueClient = client.keyValueClient();
         String key = UUID.randomUUID().toString();
         String value = Base64.encodeBase64String(RandomStringUtils.random(20).getBytes());
-        Operation[] operation = new Operation[] {ImmutableOperation.builder().verb("set")
-                .key(key)
-                .value(value).build()};
+        Operation[] operation = new Operation[] {ImmutableOperation.builder().setVerb("set")
+                .setKey(key)
+                .setValue(value).build()};
 
         ConsulResponse<TxResponse> response = keyValueClient.performTransaction(operation);
 

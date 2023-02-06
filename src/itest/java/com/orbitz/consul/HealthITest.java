@@ -100,10 +100,10 @@ public class HealthITest extends BaseIntegrationTest {
         Registration.RegCheck check = Registration.RegCheck.ttl(5);
         Registration registration = ImmutableRegistration
                 .builder()
-                .check(check)
-                .port(8080)
-                .name(serviceName)
-                .id(serviceId)
+                .setCheck(check)
+                .setPort(8080)
+                .setName(serviceName)
+                .setId(serviceId)
                 .build();
 
         client.agentClient().register(registration);

@@ -111,88 +111,88 @@ public abstract class Registration {
         public static RegCheck ttl(long ttl) {
             return ImmutableRegCheck
                     .builder()
-                    .ttl(String.format("%ss", ttl))
+                    .setTtl(String.format("%ss", ttl))
                     .build();
         }
 
         public static RegCheck args(List<String> args, long interval) {
             return ImmutableRegCheck
                     .builder()
-                    .args(args)
-                    .interval(String.format("%ss", interval))
+                    .setArgs(args)
+                    .setInterval(String.format("%ss", interval))
                     .build();
         }
 
         public static RegCheck args(List<String> args, long interval, long timeout) {
             return ImmutableRegCheck
                     .builder()
-                    .args(args)
-                    .interval(String.format("%ss", interval))
-                    .timeout(String.format("%ss", timeout))
+                    .setArgs(args)
+                    .setInterval(String.format("%ss", interval))
+                    .setTimeout(String.format("%ss", timeout))
                     .build();
         }
         
         public static RegCheck args(List<String> args, long interval, long timeout, String notes) {
             return ImmutableRegCheck
                     .builder()
-                    .args(args)
-                    .interval(String.format("%ss", interval))
-                    .timeout(String.format("%ss", timeout))
-                    .notes(notes)
+                    .setArgs(args)
+                    .setInterval(String.format("%ss", interval))
+                    .setTimeout(String.format("%ss", timeout))
+                    .setNotes(notes)
                     .build();
         }
 
         public static RegCheck http(String http, long interval) {
             return ImmutableRegCheck
                     .builder()
-                    .http(http)
-                    .interval(String.format("%ss", interval))
+                    .setHttp(http)
+                    .setInterval(String.format("%ss", interval))
                     .build();
         }
 
         public static RegCheck http(String http, long interval, long timeout) {
             return ImmutableRegCheck
                     .builder()
-                    .http(http)
-                    .interval(String.format("%ss", interval))
-                    .timeout(String.format("%ss", timeout))
+                    .setHttp(http)
+                    .setInterval(String.format("%ss", interval))
+                    .setTimeout(String.format("%ss", timeout))
                     .build();
         }
         
         public static RegCheck http(String http, long interval, long timeout, String notes) {
             return ImmutableRegCheck
                     .builder()
-                    .http(http)
-                    .interval(String.format("%ss", interval))
-                    .timeout(String.format("%ss", timeout))
-                    .notes(notes)
+                    .setHttp(http)
+                    .setInterval(String.format("%ss", interval))
+                    .setTimeout(String.format("%ss", timeout))
+                    .setNotes(notes)
                     .build();
         }
 
         public static RegCheck tcp(String tcp, long interval) {
             return ImmutableRegCheck
                     .builder()
-                    .tcp(tcp)
-                    .interval(String.format("%ss", interval))
+                    .setTcp(tcp)
+                    .setInterval(String.format("%ss", interval))
                     .build();
         }
 
         public static RegCheck tcp(String tcp, long interval, long timeout) {
             return ImmutableRegCheck
                     .builder()
-                    .tcp(tcp)
-                    .interval(String.format("%ss", interval))
-                    .timeout(String.format("%ss", timeout))
+                    .setTcp(tcp)
+                    .setInterval(String.format("%ss", interval))
+                    .setTimeout(String.format("%ss", timeout))
                     .build();
         }
         
         public static RegCheck tcp(String tcp, long interval, long timeout, String notes) {
             return ImmutableRegCheck
                     .builder()
-                    .tcp(tcp)
-                    .interval(String.format("%ss", interval))
-                    .timeout(String.format("%ss", timeout))
-                    .notes(notes)
+                    .setTcp(tcp)
+                    .setInterval(String.format("%ss", interval))
+                    .setTimeout(String.format("%ss", timeout))
+                    .setNotes(notes)
                     .build();
         }
 
@@ -203,9 +203,9 @@ public abstract class Registration {
         public static RegCheck grpc(String grpc, long interval, boolean useTls) {
             return ImmutableRegCheck
                     .builder()
-                    .grpc(grpc)
-                    .grpcUseTls(useTls)
-                    .interval(String.format("%ss", interval))
+                    .setGrpc(grpc)
+                    .setGrpcUseTls(useTls)
+                    .setInterval(String.format("%ss", interval))
                     .build();
         }
 

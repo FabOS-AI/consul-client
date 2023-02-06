@@ -24,11 +24,11 @@ public class PreparedQueryITest extends BaseIntegrationTest {
         PreparedQueryClient preparedQueryClient = consul.preparedQueryClient();
 
         PreparedQuery preparedQuery = ImmutablePreparedQuery.builder()
-                .name(query)
-                .token("")
-                .service(ImmutableServiceQuery.builder()
-                        .service(service)
-                        .onlyPassing(true)
+                .setName(query)
+                .setToken("")
+                .setService(ImmutableServiceQuery.builder()
+                        .setService(service)
+                        .setOnlyPassing(true)
                         .build())
                 .build();
 

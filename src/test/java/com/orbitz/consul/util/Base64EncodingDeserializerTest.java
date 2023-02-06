@@ -16,11 +16,11 @@ public class Base64EncodingDeserializerTest {
     public void shouldDeserialize() throws IOException {
         String value = RandomStringUtils.randomAlphabetic(12);
         Event event = ImmutableEvent.builder()
-                .id("1")
-                .lTime(1L)
-                .name("name")
-                .version(1)
-                .payload(BaseEncoding.base64().encode(value.getBytes()))
+                .setId("1")
+                .setLTime(1L)
+                .setName("name")
+                .setVersion(1)
+                .setPayload(BaseEncoding.base64().encode(value.getBytes()))
                 .build();
 
         String serializedEvent = Jackson.MAPPER.writeValueAsString(event);

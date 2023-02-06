@@ -8,22 +8,22 @@ public class FailoverTest {
     @Test
     public void creatingFailoverWithDatacentersIsValid() {
         ImmutableFailover.builder()
-                .datacenters(Lists.newArrayList("dc1", "dc2"))
+                .setDatacenters(Lists.newArrayList("dc1", "dc2"))
                 .build();
     }
 
     @Test
     public void creatingFailoverWithNearestIsValid() {
         ImmutableFailover.builder()
-                .nearestN(2)
+                .setNearestN(2)
                 .build();
     }
 
     @Test
     public void creatingFailoverWithNearestAndDatacentersIsValid() {
         ImmutableFailover.builder()
-                .datacenters(Lists.newArrayList("dc1", "dc2"))
-                .nearestN(2)
+                .setDatacenters(Lists.newArrayList("dc1", "dc2"))
+                .setNearestN(2)
                 .build();
     }
 }

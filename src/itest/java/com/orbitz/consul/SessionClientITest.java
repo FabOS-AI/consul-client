@@ -28,7 +28,7 @@ public class SessionClientITest extends BaseIntegrationTest {
 
     @Test
     public void testCreateAndDestroySession() throws Exception {
-        final Session value = ImmutableSession.builder().name("session_" + UUID.randomUUID().toString()).build();
+        final Session value = ImmutableSession.builder().setName("session_" + UUID.randomUUID().toString()).build();
         SessionCreatedResponse session = sessionClient.createSession(value);
         assertNotNull(session);
 
@@ -44,7 +44,7 @@ public class SessionClientITest extends BaseIntegrationTest {
 
     @Test
     public void testRenewSession() throws Exception {
-        final Session value = ImmutableSession.builder().name("session_" + UUID.randomUUID().toString()).build();
+        final Session value = ImmutableSession.builder().setName("session_" + UUID.randomUUID().toString()).build();
 
         SessionCreatedResponse session = sessionClient.createSession(value);
         assertNotNull(session);
@@ -61,7 +61,7 @@ public class SessionClientITest extends BaseIntegrationTest {
     public void testAcquireLock() {
         String key = UUID.randomUUID().toString();
 
-        Session value = ImmutableSession.builder().name("session_" + UUID.randomUUID().toString()).build();
+        Session value = ImmutableSession.builder().setName("session_" + UUID.randomUUID().toString()).build();
         String sessionId = sessionClient.createSession(value).getId();
         String valueName = value.getName().get();
 
@@ -80,7 +80,7 @@ public class SessionClientITest extends BaseIntegrationTest {
     public void testAcquireLockTwiceFromSameSession() {
         String key = UUID.randomUUID().toString();
 
-        Session value = ImmutableSession.builder().name("session_" + UUID.randomUUID().toString()).build();
+        Session value = ImmutableSession.builder().setName("session_" + UUID.randomUUID().toString()).build();
         String sessionId = sessionClient.createSession(value).getId();
         String valueName = value.getName().get();
 
@@ -101,11 +101,11 @@ public class SessionClientITest extends BaseIntegrationTest {
     public void testAcquireLockTwiceFromDifferentSessions() {
         String key = UUID.randomUUID().toString();
 
-        Session firstSessionValue = ImmutableSession.builder().name("session_" + UUID.randomUUID().toString()).build();
+        Session firstSessionValue = ImmutableSession.builder().setName("session_" + UUID.randomUUID().toString()).build();
         String firstSessionId = sessionClient.createSession(firstSessionValue).getId();
         String firstSessionValueContent = firstSessionValue.getName().get();
 
-        Session secondSessionValue = ImmutableSession.builder().name("session_" + UUID.randomUUID().toString()).build();
+        Session secondSessionValue = ImmutableSession.builder().setName("session_" + UUID.randomUUID().toString()).build();
         String secondSessionId = sessionClient.createSession(secondSessionValue).getId();
         String secondSessionValueNameContent = secondSessionValue.getName().get();
 
@@ -128,7 +128,7 @@ public class SessionClientITest extends BaseIntegrationTest {
     public void testGetSessionInfo() throws Exception {
         String key = UUID.randomUUID().toString();
 
-        Session value = ImmutableSession.builder().name("session_" + UUID.randomUUID().toString()).build();
+        Session value = ImmutableSession.builder().setName("session_" + UUID.randomUUID().toString()).build();
         String sessionId = sessionClient.createSession(value).getId();
         String valueName = value.getName().get();
 
@@ -150,7 +150,7 @@ public class SessionClientITest extends BaseIntegrationTest {
     public void testListSessions() throws Exception {
         String key = UUID.randomUUID().toString();
 
-        Session value = ImmutableSession.builder().name("session_" + UUID.randomUUID().toString()).build();
+        Session value = ImmutableSession.builder().setName("session_" + UUID.randomUUID().toString()).build();
         String sessionId = sessionClient.createSession(value).getId();
 
         try {
