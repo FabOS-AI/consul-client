@@ -118,7 +118,7 @@ public class AclTestIgnore {
         TokenResponse readToken = aclClient.readToken(createdToken.accessorId());
 
         assertThat(readToken.description(), is(tokenDescription));
-        assertThat(readToken.policies().get(0).name(), is(policyName));
+        assertThat(readToken.policies().get(0).getName().get(), is(policyName));
     }
 
     @Test

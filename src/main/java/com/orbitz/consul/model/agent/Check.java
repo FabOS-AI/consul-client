@@ -19,7 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 @JsonDeserialize(as = ImmutableCheck.class)
 public abstract class Check {
 
-    @JsonProperty("CheckId")
+    @JsonProperty("Id")
     public abstract Optional<String> getId();
 
     @JsonProperty("Name")

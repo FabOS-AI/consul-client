@@ -302,7 +302,7 @@ public class AgentITest extends BaseIntegrationTest {
         for (ServiceHealth health : client.healthClient().getAllServiceInstances(serviceName).getResponse()) {
             if (health.getService().getId().equals(serviceId)) {
                 found = true;
-                assertThat(health.getChecks().size(), is(2));
+                assertThat(health.getChecks().size(), is(3));
             }
         }
 

@@ -61,10 +61,10 @@ public abstract class Token {
     public abstract static class PolicyLink {
 
         @JsonProperty("ID")
-        public abstract Optional<String> id();
+        public abstract Optional<String> getId();
 
         @JsonProperty("Name")
-        public abstract Optional<String> name();
+        public abstract Optional<String> getName();
     }
 
     @Value.Immutable
