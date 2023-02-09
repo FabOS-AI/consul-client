@@ -11,6 +11,7 @@ import org.immutables.value.Value;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 @Value.Immutable
 @JsonSerialize(as = ImmutableService.class)
@@ -38,7 +39,7 @@ public abstract class Service {
     public abstract Map<String,String> getMeta();
 
     @JsonProperty("Port")
-    public abstract int getPort();
+    public abstract OptionalInt getPort();
 
     @JsonProperty("Weights")
     public abstract Optional<ServiceWeights> getWeights();
