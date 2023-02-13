@@ -18,28 +18,28 @@ import java.util.Optional;
 public abstract class Role {
 
     @JsonProperty("Name")
-    public abstract String name();
+    public abstract String getName();
 
     @JsonProperty("ID")
-    public abstract Optional<String> id();
+    public abstract Optional<String> getId();
 
     @JsonProperty("Description")
-    public abstract Optional<String> description();
+    public abstract Optional<String> getDescription();
 
     @JsonProperty("Policies")
     @JsonDeserialize(as = ImmutableList.class, contentAs = RolePolicyLink.class)
-    public abstract List<RolePolicyLink> policies();
+    public abstract List<RolePolicyLink> getPolicies();
 
     @JsonProperty("ServiceIdentities")
     @JsonDeserialize(as = ImmutableList.class, contentAs = RoleServiceIdentity.class)
-    public abstract List<RoleServiceIdentity> serviceIdentities();
+    public abstract List<RoleServiceIdentity> getServiceIdentities();
 
     @JsonProperty("NodeIdentities")
     @JsonDeserialize(as = ImmutableList.class, contentAs = RoleNodeIdentity.class)
-    public abstract List<RoleNodeIdentity> nodeIdentities();
+    public abstract List<RoleNodeIdentity> getNodeIdentities();
 
     @JsonProperty("Namespace")
-    public abstract Optional<String> namespace();
+    public abstract Optional<String> getNamespace();
 
     @Value.Immutable
     @JsonSerialize(as = ImmutableRolePolicyLink.class)
@@ -61,11 +61,11 @@ public abstract class Role {
     public abstract static class RoleServiceIdentity {
 
         @JsonProperty("ServiceName")
-        public abstract String name();
+        public abstract String getName();
 
         @JsonProperty("Datacenters")
         @JsonDeserialize(as = ImmutableList.class, contentAs = String.class)
-        public abstract List<String> datacenters();
+        public abstract List<String> getDatacenters();
     }
 
     @Value.Immutable
@@ -75,9 +75,9 @@ public abstract class Role {
     public abstract static class RoleNodeIdentity {
 
         @JsonProperty("NodeName")
-        public abstract String name();
+        public abstract String getName();
 
         @JsonProperty("Datacenter")
-        public abstract String datacenter();
+        public abstract String getDatacenter();
     }
 }

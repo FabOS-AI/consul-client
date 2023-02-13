@@ -137,6 +137,13 @@ public class AclClient extends BaseClient {
         http.extract(api.deleteRole(id));
     }
 
+    public BindingRule readBindingRule(String id){return http.extract(api.readBindingRule(id));}
+
+    public List<BindingRule> listBindingRules(){return http.extract(api.listBindingRules());};
+
+    public BindingRule createBindingRule(BindingRule bindingRule){return http.extract(api.createBindingRule(bindingRule));}
+    public Boolean deleteBindingRule(String id){return http.extract(api.deleteBindingRule(id));}
+
     interface Api {
 
         @Deprecated
@@ -216,6 +223,20 @@ public class AclClient extends BaseClient {
 
         @GET("acl/roles")
         Call<List<RoleListResponse>> listRoles(@QueryMap Map<String, Object> query);
+
+        @GET("acl/binding-rule/{id}")
+        Call<BindingRule> readBindingRule(@Path("id") String id);
+
+        @GET("acl/binding-rules")
+        Call<List<BindingRule>> listBindingRules();
+
+        @PUT("acl/binding-rule")
+        Call<BindingRule> createBindingRule(@Body BindingRule bindingRule);
+
+        @DELETE("acl/binding-rule/{id}")
+        Call<Boolean> deleteBindingRule(@Path("id") String id);
+
+
     }
 
 }
