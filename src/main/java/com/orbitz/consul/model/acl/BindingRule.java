@@ -8,6 +8,7 @@ import org.immutables.value.Value;
 
 import java.math.BigInteger;
 import java.util.Optional;
+import java.util.OptionalLong;
 
 @Value.Immutable
 @JsonSerialize(as = ImmutableBindingRule.class)
@@ -33,8 +34,8 @@ public abstract class BindingRule {
     public abstract String getBindName();
 
     @JsonProperty("CreateIndex")
-    public abstract BigInteger getCreateIndex();
+    public abstract OptionalLong getCreateIndex();
 
     @JsonProperty("ModifyIndex")
-    public abstract BigInteger getModifyIndex();
+    public abstract OptionalLong getModifyIndex();
 }

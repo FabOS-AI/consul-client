@@ -4,12 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import java.util.Optional;
+
+import java.util.*;
 
 import org.immutables.value.Value;
-
-import java.util.List;
-import java.util.Map;
 
 @Value.Immutable
 @Value.Style(init = "set*")
@@ -17,6 +15,9 @@ import java.util.Map;
 @JsonDeserialize(as = ImmutableCatalogService.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class CatalogService {
+
+    @JsonProperty("ID")
+    public abstract UUID getID();
 
     @JsonProperty("Node")
     public abstract String getNode();
@@ -26,6 +27,9 @@ public abstract class CatalogService {
 
     @JsonProperty("Datacenter")
     public abstract Optional<String> getDatacenter();
+
+    @JsonProperty("TaggedAddresses")
+    public abstract Optional<TaggedAddresses> getTaggedAddresses();
 
     @JsonProperty("ServiceName")
     public abstract String getServiceName();
@@ -53,4 +57,10 @@ public abstract class CatalogService {
 
     @JsonProperty("NodeMeta")
     public abstract Map<String,String> getNodeMeta();
+
+    @JsonProperty("CreateIndex")
+    public abstract OptionalLong getCreateIndex();
+
+    @JsonProperty("ModifyIndex")
+    public abstract OptionalLong getModifyIndex();
 }

@@ -144,6 +144,10 @@ public class AclClient extends BaseClient {
     public BindingRule createBindingRule(BindingRule bindingRule){return http.extract(api.createBindingRule(bindingRule));}
     public Boolean deleteBindingRule(String id){return http.extract(api.deleteBindingRule(id));}
 
+    public LoginResponse login(Login login){return http.extract(api.login(login));}
+
+    public void logout(){api.logout();}
+
     interface Api {
 
         @Deprecated
@@ -236,7 +240,11 @@ public class AclClient extends BaseClient {
         @DELETE("acl/binding-rule/{id}")
         Call<Boolean> deleteBindingRule(@Path("id") String id);
 
+        @POST("acl/login")
+        Call<LoginResponse> login(@Body Login login);
 
+        @POST("acl/logout")
+        Call<Void> logout();
     }
 
 }
