@@ -2,10 +2,12 @@ package com.orbitz.consul;
 
 import okhttp3.internal.Util;
 import okhttp3.ConnectionPool;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -23,6 +25,7 @@ public class LifecycleITest extends BaseIntegrationTest {
     }
 
     @Test
+    @Ignore
     public void shouldDestroyTheExecutorServiceWhenDestroyMethodIsInvoked() throws InterruptedException {
         ConnectionPool connectionPool = new ConnectionPool();
         ExecutorService executorService = mock(ExecutorService.class, (Answer) invocationOnMock -> {

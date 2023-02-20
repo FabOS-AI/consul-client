@@ -17,7 +17,7 @@ import org.immutables.value.Value;
 public abstract class CatalogService {
 
     @JsonProperty("ID")
-    public abstract UUID getID();
+    public abstract Optional<UUID> getID();
 
     @JsonProperty("Node")
     public abstract String getNode();

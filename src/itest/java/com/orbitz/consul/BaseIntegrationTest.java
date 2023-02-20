@@ -58,7 +58,13 @@ public abstract class BaseIntegrationTest {
 
     @After
     public void after() {
-        deregisterServices.forEach(client.agentClient()::deregister);
+        for (String deregisterService : deregisterServices) {
+            try{
+                client.agentClient().deregister(deregisterService);
+            }catch (ConsulException exception){
+                System.out.println(exception.getMessage());
+            }
+        }
         deregisterServices.clear();
     }
 

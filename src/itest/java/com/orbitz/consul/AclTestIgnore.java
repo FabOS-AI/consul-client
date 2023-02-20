@@ -183,7 +183,8 @@ public class AclTestIgnore {
         AclClient aclClient = client.aclClient();
 
         TokenResponse selfToken = aclClient.readSelfToken();
-        assertThat(selfToken.description(), is("Master Token"));
+//        assertThat(selfToken.description(), is("Master Token"));
+        assertThat(selfToken.description(), is("Initial Management Token"));
     }
 
     @Test
@@ -204,9 +205,10 @@ public class AclTestIgnore {
     @Test
     public void testListTokens() {
         AclClient aclClient = client.aclClient();
+        List l = aclClient.listTokens();
 
         assertTrue(aclClient.listTokens().stream().anyMatch(p -> Objects.equals(p.description(), "Anonymous Token")));
-        assertTrue(aclClient.listTokens().stream().anyMatch(p -> Objects.equals(p.description(), "Master Token")));
+        assertTrue(aclClient.listTokens().stream().anyMatch(p -> Objects.equals(p.description(), "Initial Management Token")));
     }
 
     @Test
