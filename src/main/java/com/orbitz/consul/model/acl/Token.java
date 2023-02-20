@@ -74,10 +74,10 @@ public abstract class Token {
     public abstract static class RoleLink {
 
         @JsonProperty("ID")
-        public abstract Optional<String> id();
+        public abstract Optional<String> getId();
 
         @JsonProperty("Name")
-        public abstract Optional<String> name();
+        public abstract Optional<String> getName();
     }
 
     @Value.Immutable
@@ -87,11 +87,11 @@ public abstract class Token {
     public abstract static class ServiceIdentity {
 
         @JsonProperty("ServiceName")
-        public abstract String name();
+        public abstract String getName();
 
         @JsonProperty("Datacenters")
         @JsonDeserialize(as = ImmutableList.class, contentAs = String.class)
-        public abstract List<String> datacenters();
+        public abstract List<String> getDatacenters();
     }
 
     @Value.Immutable
@@ -101,9 +101,9 @@ public abstract class Token {
     public abstract static class NodeIdentity {
 
         @JsonProperty("NodeName")
-        public abstract String name();
+        public abstract String getName();
 
         @JsonProperty("Datacenter")
-        public abstract String datacenter();
+        public abstract String getDatacenter();
     }
 }

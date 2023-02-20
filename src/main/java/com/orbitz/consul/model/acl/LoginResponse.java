@@ -29,20 +29,16 @@ public abstract class LoginResponse {
     public abstract Optional<String> getDescription();
 
     @JsonProperty("Policies")
-    @JsonDeserialize(as = ImmutableList.class, contentAs = Token.PolicyLink.class)
-    public abstract List<Token.PolicyLink> getPolicies();
+    public abstract Optional<List<Token.PolicyLink>> getPolicies();
 
     @JsonProperty("Roles")
-    @JsonDeserialize(as = ImmutableList.class, contentAs = Token.PolicyLink.class)
-    public abstract List<Token.RoleLink> getRoles();
+    public abstract Optional<List<Token.RoleLink>> getRoles();
 
     @JsonProperty("ServiceIdentities")
-    @JsonDeserialize(as = ImmutableList.class, contentAs = Role.RoleServiceIdentity.class)
-    public abstract List<Role.RoleServiceIdentity> getServiceIdentities();
+    public abstract Optional<List<Role.RoleServiceIdentity>> getServiceIdentities();
 
     @JsonProperty("NodeIdentities")
-    @JsonDeserialize(as = ImmutableList.class, contentAs = Token.NodeIdentity.class)
-    public abstract List<Token.NodeIdentity> getNodeIdentities();
+    public abstract Optional<List<Token.NodeIdentity>> getNodeIdentities();
 
     @JsonProperty("Local")
     public abstract Optional<Boolean> getLocal();

@@ -19,6 +19,10 @@ public class ClientEventHandler {
     private final String clientName;
     private final ClientEventCallback callback;
 
+    public ClientEventHandler(){
+        this("", null);
+    }
+
     public ClientEventHandler(String clientName, ClientEventCallback callback) {
         this.clientName = clientName;
         this.callback = callback;
