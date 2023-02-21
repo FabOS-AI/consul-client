@@ -12,4 +12,4 @@
 
 
 ** Old Changes **
-[Link to Repo]
+https://github.com/rickfast/consul-client/blob/master/CHANGELOG.md
