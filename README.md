@@ -1,5 +1,4 @@
-![Build Status](https://github.com/rickfast/consul-client/actions/workflows/maven.yml/badge.svg)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.orbitz.consul/consul-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.orbitz.consul/consul-client)
+[![Java CI with Maven](https://github.com/FabOS-AI/consul-client/actions/workflows/maven.yml/badge.svg)](https://github.com/FabOS-AI/consul-client/actions/workflows/maven.yml)
 
 Consul Client for Java
 ======================
