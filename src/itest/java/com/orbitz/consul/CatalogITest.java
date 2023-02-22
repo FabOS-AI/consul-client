@@ -24,6 +24,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.*;
 
 public class CatalogITest extends BaseIntegrationTest {
@@ -90,33 +91,29 @@ public class CatalogITest extends BaseIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void shouldGetTaggedAddressesForNodesLists() throws UnknownHostException {
         CatalogClient catalogClient = client.catalogClient();
 
         final List<Node> nodesResp = catalogClient.getNodes().getResponse();
         for (Node node : nodesResp) {
-            assertNotNull(node.getTaggedAddresses());
-            assertNotNull(node.getTaggedAddresses().get().getWan());
-            assertFalse(node.getTaggedAddresses().get().getWan().isEmpty());
+            assertThat(node.getTaggedAddresses()).isNotNull();
+            assertThat(node.getTaggedAddresses().get().getWan()).isNotNull().isNotEmpty();
         }
     }
 
     @Test
-    @Ignore
     public void shouldGetTaggedAddressesForNode() throws UnknownHostException {
         CatalogClient catalogClient = client.catalogClient();
 
         final List<Node> nodesResp = catalogClient.getNodes().getResponse();
         for (Node tmp : nodesResp) {
             final Node node = catalogClient.getNode(tmp.getNode()).getResponse().getNode();
-            assertNotNull(node.getTaggedAddresses());
-            assertNotNull(node.getTaggedAddresses().get().getWan());
-            assertFalse(node.getTaggedAddresses().get().getWan().isEmpty());
+            assertThat(node.getTaggedAddresses()).isPresent();
+            assertThat(node.getTaggedAddresses().get().getWan()).isNotEmpty();
         }
     }
 
-    @Ignore
+
     @Test
     public void shouldRegisterService() {
         UUID id = UUID.randomUUID();
@@ -160,7 +157,7 @@ public class CatalogITest extends BaseIntegrationTest {
         );
     }
 
-    @Ignore
+
     @Test
     public void shouldRegisterServiceNoWeights() {
         String service = UUID.randomUUID().toString();
@@ -207,6 +204,7 @@ public class CatalogITest extends BaseIntegrationTest {
     public void shouldDeregisterWithDefaultDC() throws InterruptedException {
         CatalogClient catalogClient = client.catalogClient();
 
+        List<Node> currentNodes = client.catalogClient().getNodes().getResponse();
         String service = UUID.randomUUID().toString();
         String serviceId = UUID.randomUUID().toString();
         String catalogId = UUID.randomUUID().toString();
@@ -229,11 +227,19 @@ public class CatalogITest extends BaseIntegrationTest {
 
         catalogClient.register(registration);
 
+        List<Node> registeredNodes = client.catalogClient().getNodes().getResponse();
+        assertThat(registeredNodes).hasSizeGreaterThan(currentNodes.size()).hasSize(currentNodes.size()+1);
+
         CatalogDeregistration deregistration = ImmutableCatalogDeregistration.builder()
                 .setNode("node")
                 .setServiceId(serviceId)
                 .build();
 
+        catalogClient.deregister(deregistration);
+
+        deregistration = ImmutableCatalogDeregistration.builder()
+                .setNode("node")
+                .build();
         catalogClient.deregister(deregistration);
 
         Synchroniser.pause(Duration.ofSeconds(1));
@@ -245,6 +251,9 @@ public class CatalogITest extends BaseIntegrationTest {
             }
         }
 
+        List<Node> nodesAfterDeregister = client.catalogClient().getNodes().getResponse();
+
+        assertThat(currentNodes).hasSameSizeAs(nodesAfterDeregister);
         assertFalse(found);
     }
 
@@ -352,6 +361,8 @@ public class CatalogITest extends BaseIntegrationTest {
         }
 
         assertNotNull(String.format("Service \"%s\" not found", serviceName), registeredService);
-        assertEquals(expectedService, registeredService);
+        assertThat(registeredService).usingRecursiveComparison()
+                .ignoringFields("iD", "modifyIndex", "createIndex")
+                .isEqualTo(expectedService);
     }
 }

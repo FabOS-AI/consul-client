@@ -31,6 +31,7 @@ import java.util.UUID;
 import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 public class AgentITest extends BaseIntegrationTest {
 
@@ -54,7 +55,6 @@ public class AgentITest extends BaseIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void shouldRegisterTtlCheck() throws UnknownHostException, InterruptedException {
         String serviceName = UUID.randomUUID().toString();
         String serviceId = UUID.randomUUID().toString();
@@ -68,7 +68,7 @@ public class AgentITest extends BaseIntegrationTest {
         for (ServiceHealth health : client.healthClient().getAllServiceInstances(serviceName).getResponse()) {
             if (health.getService().getId().equals(serviceId)) {
                 found = true;
-                assertThat(health.getChecks().size(), is(2));
+                assertThat(health.getChecks()).hasSize(2);
             }
         }
 
@@ -76,7 +76,6 @@ public class AgentITest extends BaseIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void shouldRegisterHttpCheck() throws UnknownHostException, InterruptedException, MalformedURLException {
         String serviceName = UUID.randomUUID().toString();
         String serviceId = UUID.randomUUID().toString();
@@ -90,7 +89,7 @@ public class AgentITest extends BaseIntegrationTest {
         for (ServiceHealth health : client.healthClient().getAllServiceInstances(serviceName).getResponse()) {
             if (health.getService().getId().equals(serviceId)) {
                 found = true;
-                assertThat(health.getChecks().size(), is(2));
+                assertThat(health.getChecks()).hasSize(2);
             }
         }
 
@@ -98,7 +97,6 @@ public class AgentITest extends BaseIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void shouldRegisterGrpcCheck() throws UnknownHostException, InterruptedException, MalformedURLException {
         String serviceName = UUID.randomUUID().toString();
         String serviceId = UUID.randomUUID().toString();
@@ -120,7 +118,7 @@ public class AgentITest extends BaseIntegrationTest {
         for (ServiceHealth health : client.healthClient().getAllServiceInstances(serviceName).getResponse()) {
             if (health.getService().getId().equals(serviceId)) {
                 found = true;
-                assertThat(health.getChecks().size(), is(2));
+                assertThat(health.getChecks()).hasSize(2);
             }
         }
 
@@ -128,7 +126,6 @@ public class AgentITest extends BaseIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void shouldRegisterCheckWithId() throws UnknownHostException, InterruptedException {
         String serviceName = UUID.randomUUID().toString();
         String serviceId = UUID.randomUUID().toString();
@@ -152,7 +149,7 @@ public class AgentITest extends BaseIntegrationTest {
         for (ServiceHealth health : client.healthClient().getAllServiceInstances(serviceName).getResponse()) {
             if (health.getService().getId().equals(serviceId)) {
                 found = true;
-                assertThat(health.getChecks().size(), is(2));
+                assertThat(health.getChecks()).hasSize(2);
                 assertTrue(health.getChecks().stream().anyMatch(check -> check.getCheckId().equals(checkId)));
             }
         }
@@ -161,7 +158,6 @@ public class AgentITest extends BaseIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void shouldRegisterCheckWithName() throws UnknownHostException, InterruptedException {
         String serviceName = UUID.randomUUID().toString();
         String serviceId = UUID.randomUUID().toString();
@@ -185,7 +181,7 @@ public class AgentITest extends BaseIntegrationTest {
         for (ServiceHealth health : client.healthClient().getAllServiceInstances(serviceName).getResponse()) {
             if (health.getService().getId().equals(serviceId)) {
                 found = true;
-                assertThat(health.getChecks().size(), is(2));
+                assertThat(health.getChecks()).hasSize(2);
                 assertTrue(health.getChecks().stream().anyMatch(check -> check.getName().equals(checkName)));
             }
         }
@@ -194,7 +190,6 @@ public class AgentITest extends BaseIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void shouldRegisterMultipleChecks() throws UnknownHostException, InterruptedException, MalformedURLException {
         String serviceName = UUID.randomUUID().toString();
         String serviceId = UUID.randomUUID().toString();
@@ -212,7 +207,7 @@ public class AgentITest extends BaseIntegrationTest {
         for (ServiceHealth health : client.healthClient().getAllServiceInstances(serviceName).getResponse()) {
             if (health.getService().getId().equals(serviceId)) {
                 found = true;
-                assertThat(health.getChecks().size(), is(3));
+                assertThat(health.getChecks()).hasSize(3);
             }
         }
 
@@ -223,7 +218,6 @@ public class AgentITest extends BaseIntegrationTest {
     // to register a single "Check"
     // and multiple "Checks" in one call
     @Test
-    @Ignore
     public void shouldRegisterMultipleChecks2() throws UnknownHostException, InterruptedException, MalformedURLException {
         String serviceName = UUID.randomUUID().toString();
         String serviceId = UUID.randomUUID().toString();
@@ -250,7 +244,7 @@ public class AgentITest extends BaseIntegrationTest {
         for (ServiceHealth health : client.healthClient().getAllServiceInstances(serviceName).getResponse()) {
             if (health.getService().getId().equals(serviceId)) {
                 found = true;
-                assertThat(health.getChecks().size(), is(3));
+                assertThat(health.getChecks()).hasSize(3);
             }
         }
 

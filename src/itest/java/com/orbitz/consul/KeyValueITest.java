@@ -1,7 +1,7 @@
 package com.orbitz.consul;
 
 import java.nio.charset.Charset;
-import java.util.Optional;
+import java.util.*;
 
 import com.google.common.collect.ImmutableSet;
 import com.orbitz.consul.async.ConsulResponseCallback;
@@ -24,9 +24,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.net.UnknownHostException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -461,7 +458,6 @@ public class KeyValueITest extends BaseIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void testBasicTxn() throws Exception {
         KeyValueClient keyValueClient = client.keyValueClient();
         String key = UUID.randomUUID().toString();
@@ -473,7 +469,8 @@ public class KeyValueITest extends BaseIntegrationTest {
         ConsulResponse<TxResponse> response = keyValueClient.performTransaction(operation);
 
         assertEquals(value, keyValueClient.getValueAsString(key).get());
-        assertEquals(response.getIndex(), keyValueClient.getValue(key).get().getModifyIndex());
+        assertEquals(response.getResponse().results().get(0).get("KV").getModifyIndex(),
+                keyValueClient.getValue(key).get().getModifyIndex());
     }
 
     @Test

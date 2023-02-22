@@ -29,7 +29,6 @@ public class HealthITest extends BaseIntegrationTest {
     private static final Map<String, String> NO_META = Collections.emptyMap();
 
     @Test
-    @Ignore
     public void shouldFetchPassingNode() throws NotRegisteredException {
         String serviceName = UUID.randomUUID().toString();
         String serviceId = UUID.randomUUID().toString();
