@@ -3,15 +3,17 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fab-os.consul</groupId>
     <artifactId>consul-client</artifactId>
-    <packaging>jar</packaging>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
+
     <name>consul-client</name>
     <url>http://maven.apache.org</url>
     <description>Consul Client for Java</description>
+
     <scm>
-        <url>scm:git@github.com:OrbitzWorldwide/consul-client.git</url>
-        <connection>scm:git@github.com:OrbitzWorldwide/consul-client.git</connection>
-        <developerConnection>scm:git@github.com:OrbitzWorldwide/consul-client.git</developerConnection>
+        <url>scm:git@github.com:FabOS-AI/consul-client.git</url>
+        <connection>scm:git@github.com:FabOS-AI/consul-client.git</connection>
+        <developerConnection>scm:git@github.com:FabOS-AI/consul-client.git</developerConnection>
     </scm>
     <licenses>
         <license>
@@ -25,6 +27,11 @@
             <id>rickfast</id>
             <name>Rick Fast</name>
             <email>rick.t.fast@gmail.com</email>
+        </developer>
+        <developer>
+            <id>ilgmi</id>
+            <name>Micheal Ilg</name>
+            <email>michael.ilg@mailbox.org</email>
         </developer>
     </developers>
     <properties>
@@ -49,10 +56,13 @@
 
     </properties>
     <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
         <repository>
-            <id>github</id>
-            <name>GitHub FabOS-AI Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/FabOS-AI/consul-client</url>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
     <repositories>
@@ -197,24 +207,65 @@
     </dependencies>
     <profiles>
         <profile>
-            <id>github</id>
-            <repositories>
-                <repository>
-                    <id>central</id>
-                    <url>https://repo1.maven.org/maven2</url>
-                </repository>
-                <repository>
-                    <id>github</id>
-                    <url>https://maven.pkg.github.com/FabOS-AI/consul-client</url>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
+            <id>ossrh</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
