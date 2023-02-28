@@ -5,6 +5,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: github-pages
     steps:
       - name: Import GPG key
         id: import_gpg
