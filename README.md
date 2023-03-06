@@ -1,5 +1,5 @@
 [![Java CI with Maven](https://github.com/FabOS-AI/consul-client/actions/workflows/maven.yml/badge.svg)](https://github.com/FabOS-AI/consul-client/actions/workflows/maven.yml)
-
+[![Coverage Status](https://coveralls.io/repos/github/FabOS-AI/consul-client/badge.svg?branch=master)](https://coveralls.io/github/FabOS-AI/consul-client?branch=master)
 Consul Client for Java
 ======================
 
