@@ -58,6 +58,7 @@
         <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
         <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
         <dependency-check-maven.version>5.0.0</dependency-check-maven.version>
+        <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
 
     </properties>
     <repositories>
@@ -415,6 +416,21 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>${coveralls-maven-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>javax.xml.bind</groupId>
+                        <artifactId>jaxb-api</artifactId>
+                        <version>2.3.1</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <jacocoReports>coverage/target/site/jacoco-aggregate-ut/jacoco.xml</jacocoReports>
+                </configuration>
             </plugin>
         </plugins>
     </build>

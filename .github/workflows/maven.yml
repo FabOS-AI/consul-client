@@ -23,7 +23,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B install -q org.jacoco:jacoco-maven-plugin:report -Pcoverage --file pom.xml
 
-    - name: sdf
+    - name: Build Codecov Report
       run: bash <(curl -s https://codecov.io/bash)
 
     - name: Build Coveralls Report
