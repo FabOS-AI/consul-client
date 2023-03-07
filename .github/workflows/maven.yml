@@ -27,7 +27,7 @@ jobs:
       run: bash <(curl -s https://codecov.io/bash)
 
     - name: Build Coveralls Report
-      run: mvn test jacoco:report coveralls:report -DrepoToken=$COVERALLS_TOKEN
+      run: mvn test jacoco:report coveralls:report  -DrepoToken=$COVERALLS_TOKEN
       env:
         GITHUB_TOKEN: ${{ github.token }}
         COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}

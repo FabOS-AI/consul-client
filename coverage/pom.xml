@@ -13,19 +13,6 @@
     <artifactId>coverage</artifactId>
     <name>coverage</name>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.github.research-virtualfortknox</groupId>
-            <artifactId>msb-client-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.research-virtualfortknox</groupId>
-            <artifactId>msb-client-websocket</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
-
     <build>
         <plugins>
 
