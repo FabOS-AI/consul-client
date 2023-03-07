@@ -21,7 +21,7 @@ jobs:
       with:
         java-version: 13.0
     - name: Build with Maven
-      run: mvn -B install -q org.jacoco:jacoco-maven-plugin:report -Pcoverage --file pom.xml
+      run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -q org.jacoco:jacoco-maven-plugin:report -Pcoverage
 
     - name: Build Codecov Report
       run: bash <(curl -s https://codecov.io/bash)
