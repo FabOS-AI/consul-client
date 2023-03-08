@@ -497,7 +497,8 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <jacocoReports>coverage/target/site/jacoco-ut/jacoco.xml</jacocoReports>
+                    <jacocoReports>${project.reporting.outputDirectory}/jacoco-unit-test-coverage-report/jacoco.xml</jacocoReports>
+<!--                    <jacocoReports>${project.reporting.outputDirectory}/jacoco-integration-test-coverage-report/jacoco.xml</jacocoReports>-->
                 </configuration>
             </plugin>
         </plugins>
