@@ -24,7 +24,7 @@ jobs:
       run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -q org.jacoco:jacoco-maven-plugin:report -Pcoverage
 
     - name: Build Coveralls Report
-      run: mvn test jacoco:report coveralls:report  -DrepoToken=$COVERALLS_TOKEN -X
+      run: mvn test jacoco:report coveralls:report  -DrepoToken=${{ secrets.COVERALLS_TOKEN }} -X
       env:
         GITHUB_TOKEN: ${{ github.token }}
         COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
