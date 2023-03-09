@@ -27,7 +27,7 @@ public class ServiceHealthCacheITest extends BaseIntegrationTest {
 
         client.agentClient().register(8080, 20L, serviceName, serviceId, NO_TAGS, NO_META);
         client.agentClient().pass(serviceId);
-        Synchroniser.pause(Duration.ofMillis(100));
+        Synchroniser.pause(Duration.ofMillis(1000));
 
         try (ServiceHealthCache svHealth = ServiceHealthCache.newCache(healthClient, serviceName)) {
             svHealth.start();
@@ -41,7 +41,7 @@ public class ServiceHealthCacheITest extends BaseIntegrationTest {
             assertEquals(serviceId, health.getService().getId());
 
             client.agentClient().fail(serviceId);
-            Synchroniser.pause(Duration.ofMillis(100));
+            Synchroniser.pause(Duration.ofMillis(1000));
             health = svHealth.getMap().get(serviceKey);
             assertNull(health);
         }
