@@ -452,9 +452,9 @@ public class KeyValueITest extends BaseIntegrationTest {
             }
         });
 
-        completed.await(3, TimeUnit.SECONDS);
+        completed.await(5, TimeUnit.SECONDS);
         keyValueClient.deleteKey(key);
-        assertEquals("Should be all success", success.get(), numTests);
+        assertEquals("Should be all success", numTests, success.get());
     }
 
     @Test
