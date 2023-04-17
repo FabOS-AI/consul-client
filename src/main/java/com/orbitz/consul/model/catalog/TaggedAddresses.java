@@ -16,7 +16,7 @@ import java.util.Optional;
 public abstract class TaggedAddresses {
 
     @JsonProperty("wan")
-    public abstract String getWan();
+    public abstract Optional<String> getWan();
 
     @JsonProperty("lan")
     public abstract Optional<String> getLan();
