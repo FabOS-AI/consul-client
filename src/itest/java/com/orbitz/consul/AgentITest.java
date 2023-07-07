@@ -186,6 +186,7 @@ public class AgentITest extends BaseIntegrationTest {
             }
         }
 
+        assertThat(client.agentClient().isRegistered(serviceId)).isTrue();
         assertTrue(found);
     }
 
