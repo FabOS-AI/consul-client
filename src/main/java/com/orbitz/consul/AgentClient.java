@@ -544,6 +544,16 @@ public class AgentClient extends BaseClient {
         http.handle(api.forceLeave(node, queryParameterOptions.toQueryParameters()));
     }
 
+    /**
+     * GET /v1/agent/leave
+     * <p/>
+     * This endpoint triggers a graceful leave and shutdown of the agent.
+     *
+     */
+    public void leave() {
+        http.handle(api.leave());
+    }
+
 
     /**
      * Checks in with Consul.
@@ -776,6 +786,9 @@ public class AgentClient extends BaseClient {
 
         @PUT("agent/force-leave/{node}")
         Call<Void> forceLeave(@Path("node") String node, @QueryName List<String> optionsParameters);
+
+        @PUT("agent/leave")
+        Call<Void> leave();
 
         @PUT("agent/check/{state}/{checkId}")
         Call<Void> check(@Path("state") String state,
